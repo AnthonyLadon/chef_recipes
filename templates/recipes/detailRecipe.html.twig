@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recipes
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="">
+		<h2>{{ recipe.name }}</h2>
+		<p>
+			{{recipe.content }}</p>
+		<div>
+			<p>Ingredients:
+			</p>
+			<ul>
+				{% for ingredient in recipe.ingredients %}
+					<li>{{ingredient }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div>
+			<p>Estimated time:
+				{{recipe.estimatedTime | date('H:i')}}min
+			</p>
+		</div>
+
+	{% endblock %}
