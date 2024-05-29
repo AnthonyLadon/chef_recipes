@@ -5,12 +5,30 @@
 
 {% block body %}
 	<div class="container">
+		<div class="text-center">Sort by:
+			{% if direction == 'asc' %}
+				<a href="{{path ("app_recipes", {direction:"desc"}) }}" class="btn btn-ghost">Cooking time
+					<i class="fa-solid fa-arrow-up"></i>
+				</a>
+			{% elseif direction == 'desc' %}
+				<a href="{{path ("app_recipes", {direction:"asc"}) }}" class="btn btn-ghost">Cooking time
+					<i class="fa-solid fa-arrow-down"></i>
+				</a>
+			{% endif %}
+		</div>
 		<h1 class="text-4xl font-bold text-center">Recipes</h1>
 		{% for recipe in recipes %}
-			<div>
-				<a href="{{path('recipe_show', {id:recipe.id}) }}">
-					<h2>{{ recipe.name }}</h2>
-				</a>
+			<div class="card lg:card-side bg-base-100 shadow-xl">
+				<figure class="max-h-64 md:max-w-60 md:max-h-60"><img src="https://images.unsplash.com/photo-1639744211487-b27e3551b07c?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="{{recipe.name }}"/></figure>
+				<div class="card-body">
+					<h2 class="card-title">{{recipe.name }}</h2>
+					<p>Category: Desserts</p>
+					<p>Esxtimated time:
+						{{recipe.estimatedTime | date('H:i')}}min</p>
+					<div class="card-actions justify-end">
+						<a href="{{path('recipe_show', {id:recipe.id}) }}" class="btn btn-primary">See more</a>
+					</div>
+				</div>
 			</div>
 		{% endfor %}
 

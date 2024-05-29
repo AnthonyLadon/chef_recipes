@@ -10,14 +10,26 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RecipesController extends AbstractController
 {
-    #[Route('/recipes', name: 'app_recipes')]
-    public function AllRecipes(EntityManagerInterface $entityManager): Response
+    #[Route('/recipes/{direction}', name: 'app_recipes')]
+    public function AllRecipes(EntityManagerInterface $entityManager, $direction): Response
     {
         $repository = $entityManager->getRepository(Recipe::class);
         $recipes = $repository->findAll();
+        isset($direction) ? $direction : $direction = 'desc';
+
+        if ($direction == 'desc') {
+            usort($recipes, function ($a, $b) {
+                return $a->getEstimatedTime() > $b->getEstimatedTime();
+            });
+        } else if ($direction == 'asc') {
+            usort($recipes, function ($a, $b) {
+                return $a->getEstimatedTime() < $b->getEstimatedTime();
+            });
+        }
 
         return $this->render('recipes/listRecipes.html.twig', [
             'recipes' => $recipes,
+            'direction' => $direction,
         ]);
     }
 
