@@ -28,7 +28,7 @@ class Recipe
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?category $categ = null;
+    private ?Category $categ = null;
 
     public function getId(): ?int
     {
