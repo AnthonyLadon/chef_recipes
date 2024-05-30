@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,26 +11,36 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RecipesController extends AbstractController
 {
-    #[Route('/recipes/{direction}', name: 'app_recipes')]
-    public function AllRecipes(EntityManagerInterface $entityManager, $direction): Response
+    #[Route('/recipes/{direction}/{categName}', name: 'app_recipes')]
+    public function AllRecipes(EntityManagerInterface $entityManager, $direction, $categName): Response
     {
-        $repository = $entityManager->getRepository(Recipe::class);
-        $recipes = $repository->findAll();
         isset($direction) ? $direction : $direction = 'desc';
+        isset($categName) ? $categName : $categName = 'all';
 
-        if ($direction == 'desc') {
-            usort($recipes, function ($a, $b) {
-                return $a->getEstimatedTime() > $b->getEstimatedTime();
-            });
-        } else if ($direction == 'asc') {
-            usort($recipes, function ($a, $b) {
-                return $a->getEstimatedTime() < $b->getEstimatedTime();
-            });
+        if ($categName != 'all') {
+            try {
+                $repositorycateg = $entityManager->getRepository(Category::class);
+                $categ = $repositorycateg->findBy(['name' => $categName]);
+                $category = $categ[0]->getId();
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        } else {
+            $category = $categName;
+        }
+
+        try {
+            $repository = $entityManager->getRepository(Recipe::class);
+            $recipes = $repository->findByDirectionAndCategory($direction, $category);
+        } catch (\Exception $e) {
+            $recipes = [];
+            throw $e;
         }
 
         return $this->render('recipes/listRecipes.html.twig', [
             'recipes' => $recipes,
             'direction' => $direction,
+            'categName' => $categName,
         ]);
     }
 

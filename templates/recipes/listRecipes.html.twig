@@ -11,10 +11,10 @@
 					<div tabindex="0" role="button" class="btn m-1">Category</div>
 					<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
 						<li>
-							<a>Desert</a>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"desserts" }) }}">Desserts</a>
 						</li>
 						<li>
-							<a>Main courses</a>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"main courses" }) }}">Main courses</a>
 						</li>
 						<li>
 							<a>Appetizers</a>
@@ -24,11 +24,11 @@
 			</div>
 			<div>Sort by:
 				{% if direction == 'asc' %}
-					<a href="{{path ("app_recipes", {direction:"desc"}) }}" class="btn btn-ghost">Cooking time
+					<a href="{{path ("app_recipes", {direction:"desc", categName:categName}) }}" class="btn btn-ghost">Cooking time
 						<i class="fa-solid fa-arrow-up"></i>
 					</a>
 				{% elseif direction == 'desc' %}
-					<a href="{{path ("app_recipes", {direction:"asc"}) }}" class="btn btn-ghost">Cooking time
+					<a href="{{path ("app_recipes", {direction:"asc", categName:categName}) }}" class="btn btn-ghost">Cooking time
 						<i class="fa-solid fa-arrow-down"></i>
 					</a>
 				{% endif %}
