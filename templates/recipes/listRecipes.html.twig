@@ -5,16 +5,34 @@
 
 {% block body %}
 	<div class="container">
-		<div class="text-center">Sort by:
-			{% if direction == 'asc' %}
-				<a href="{{path ("app_recipes", {direction:"desc"}) }}" class="btn btn-ghost">Cooking time
-					<i class="fa-solid fa-arrow-up"></i>
-				</a>
-			{% elseif direction == 'desc' %}
-				<a href="{{path ("app_recipes", {direction:"asc"}) }}" class="btn btn-ghost">Cooking time
-					<i class="fa-solid fa-arrow-down"></i>
-				</a>
-			{% endif %}
+		<div class="flex">
+			<div>Filter by:
+				<div class="dropdown dropdown-hover">
+					<div tabindex="0" role="button" class="btn m-1">Category</div>
+					<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+						<li>
+							<a>Desert</a>
+						</li>
+						<li>
+							<a>Main courses</a>
+						</li>
+						<li>
+							<a>Appetizers</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>Sort by:
+				{% if direction == 'asc' %}
+					<a href="{{path ("app_recipes", {direction:"desc"}) }}" class="btn btn-ghost">Cooking time
+						<i class="fa-solid fa-arrow-up"></i>
+					</a>
+				{% elseif direction == 'desc' %}
+					<a href="{{path ("app_recipes", {direction:"asc"}) }}" class="btn btn-ghost">Cooking time
+						<i class="fa-solid fa-arrow-down"></i>
+					</a>
+				{% endif %}
+			</div>
 		</div>
 		<h1 class="text-4xl font-bold text-center">Recipes</h1>
 		{% for recipe in recipes %}

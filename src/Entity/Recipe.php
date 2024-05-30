@@ -26,6 +26,10 @@ class Recipe
     #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true)]
     private ?array $ingredients = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?category $categ = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +79,18 @@ class Recipe
     public function setIngredients(?array $ingredients): static
     {
         $this->ingredients = $ingredients;
+
+        return $this;
+    }
+
+    public function getCateg(): ?category
+    {
+        return $this->categ;
+    }
+
+    public function setCateg(?category $categ): static
+    {
+        $this->categ = $categ;
 
         return $this;
     }

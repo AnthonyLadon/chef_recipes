@@ -33,8 +33,8 @@ class RecipesController extends AbstractController
         ]);
     }
 
-    #[Route('/recipes/{id}', name: 'recipe_show')]
-    public function Recipe($id, EntityManagerInterface $entityManager): Response
+    #[Route('/recipe-detail/{id}', name: 'recipe_show')]
+    public function Recipe(EntityManagerInterface $entityManager, $id): Response
     {
         $repository = $entityManager->getRepository(Recipe::class);
         $recipe = $repository->find($id);
