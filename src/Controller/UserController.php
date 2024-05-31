@@ -24,4 +24,19 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/user/{id}/picture', name: 'app_user_picture')]
+    public function edit(EntityManagerInterface $entityManager, $id): Response
+    {
+        try {
+            $id = (int) $id;
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException('The user does not exist');
+        }
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        return $this->render('user/profile-picture.html.twig', [
+            'user' => $user,
+        ]);
+    }
 }
