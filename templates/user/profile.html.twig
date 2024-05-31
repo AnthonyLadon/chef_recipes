@@ -5,12 +5,11 @@
 
 {% block body %}
 	{% if app.user and app.user.id == user.id and is_granted("ROLE_USER") %}
-		<div class="w-44 rounded-full mx-auto">
+		<h1 class="my-12 text-center text-3xl text-primary">{{user.firstName }}'s profile</h1>
+		<div class="w-44 rounded-full mx-auto flex flex-col items-center">
 			<img class="w-44 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
+			<a class="link-info link-hover" href="{{path('app_user_picture', {id:user.id}) }}">Change my picture</a>
 		</div>
-		<h1 class="text-center text-3xl text-primary">{{user.firstName }}'s profile</h1>
-
-		<a href="{{path('app_user_picture', {id:user.id}) }}">Change my picture</a>
 	{% else %}
 		<div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
 			<svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 20 20">

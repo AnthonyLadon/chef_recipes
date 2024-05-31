@@ -18,7 +18,7 @@
 			{% endblock %}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="min-h-screen flex flex-col">
 		<header>
 			<div class="navbar bg-base-100 px-2 max-w-screen-2xl mx-auto">
 				<div class="navbar-start">
@@ -103,8 +103,9 @@
 			</div>
 		</header>
 
-		<div class="container mx-auto min-h-96 max-w-screen-xl px-2"> {% block body %}{% endblock %}
-			</div>
+		{# flex-grow allows the main content to grow and take up the remaining space in the container. (To push the footer on the bottom) #}
+		<main class="container flex-grow mx-auto min-h-96 max-w-screen-xl px-2"> {% block body %}{% endblock %}
+			</main>
 
 
 			<footer class="footer footer-center p-4 mt-14 bg-base-300 text-base-content">

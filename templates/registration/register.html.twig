@@ -8,21 +8,53 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<h1>Register</h1>
+	<div class="mt-12 mx-auto w-full max-w-md bg-white rounded-lg shadow-md p-6">
+		<h1 class="text-2xl font-bold mb-4">Register</h1>
+		{{ form_start(registrationForm, {'attr': {'class': 'space-y-4'}}) }}
 
-	{{ form_errors(registrationForm) }}
+		{{ form_errors(registrationForm) }}
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.firstName) }}
-	{{ form_row(registrationForm.lastName) }}
-	{{ form_row(registrationForm.city) }}
-	{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-	<p>Please follow password constraints: 1 uppercase letter, 1 number, 1 special character (@, #, $, %), and no more than 3 identical characters in a row.</p>
-	{{ form_row(registrationForm.agreeTerms) }}
+		<div>
+			{{ form_label(registrationForm.email, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.email, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.email) }}
+		</div>
 
-	<button type="submit" class="btn">Register</button>
+		<div>
+			{{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.firstName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.firstName) }}
+		</div>
+
+		<div>
+			{{ form_label(registrationForm.lastName, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.lastName, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.lastName) }}
+		</div>
+
+		<div>
+			{{ form_label(registrationForm.city, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.city, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.city) }}
+		</div>
+
+		<div>
+			{{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.plainPassword) }}
+			<p class="mt-2 text-sm text-gray-500">Please follow password constraints: 1 uppercase letter, 1 number, 1 special character (@, #, $, %), and no more than 3 identical characters in a row.</p>
+		</div>
+
+		<div>
+			{{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+			{{ form_errors(registrationForm.agreeTerms) }}
+		</div>
+
+		<div>
+			<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+		</div>
+	</div>
+
 	{{ form_end(registrationForm) }}
 {% endblock %}

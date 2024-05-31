@@ -4,37 +4,45 @@
 {% endblock %}
 
 {% block body %}
-	<form method="post">
+	<div class="mt-12 mx-auto w-full max-w-md bg-white rounded-lg shadow-md p-6">
 		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
-
-		{% if app.user %}
-			<div class="mb-3">
-				You are logged in as
-				{{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Logout</a>
+			<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+				{{ error.messageKey|trans(error.messageData, 'security') }}
 			</div>
 		{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<label for="username">Email</label>
-		<input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-		<label for="password">Password</label>
-		<input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+		{% if app.user %}
+			<div class="mb-4 text-gray-700">
+				You are logged in as
+				<strong>{{ app.user.userIdentifier }}</strong>,
+				<a href="{{ path('app_logout') }}" class="text-blue-500 hover:underline">Logout</a>
+			</div>
+		{% endif %}
 
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+		<h1 class="text-2xl font-bold mb-4">Please sign in</h1>
 
-		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" name="_remember_me">
-				Remember me
-			</label>
-		</div>
+		<form method="post">
+			<div class="mb-4">
+				<label for="username" class="block text-sm font-medium text-gray-700">Email</label>
+				<input type="email" value="{{ last_username }}" name="_username" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="email" required autofocus>
+			</div>
 
+			<div class="mb-4">
+				<label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+				<input type="password" name="_password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="current-password" required>
+			</div>
 
-		<button class="btn btn-lg btn-primary" type="submit">
-			Sign in
-		</button>
-	</form>
-{% endblock %}
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<div class="mb-4 flex items-center">
+				<input type="checkbox" name="_remember_me" id="remember_me" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+				<label for="remember_me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+			</div>
+
+			<div>
+				<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+					Sign in
+				</button>
+			</div>
+		</form>
+	{% endblock %}

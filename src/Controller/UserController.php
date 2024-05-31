@@ -13,12 +13,11 @@ class UserController extends AbstractController
     #[Route('/user/{id}', name: 'app_user')]
     public function index(EntityManagerInterface $entityManager, $id): Response
     {
-        try {
-            $id = (int) $id;
-        } catch (\Exception $e) {
-            throw $this->createNotFoundException('The user does not exist');
-        }
+        $id = (int) $id;
         $user = $entityManager->getRepository(User::class)->find($id);
+        if (!$user) {
+            throw $this->createNotFoundException('The user is not found');
+        }
 
         return $this->render('user/profile.html.twig', [
             'user' => $user,
@@ -28,11 +27,7 @@ class UserController extends AbstractController
     #[Route('/user/{id}/picture', name: 'app_user_picture')]
     public function edit(EntityManagerInterface $entityManager, $id): Response
     {
-        try {
-            $id = (int) $id;
-        } catch (\Exception $e) {
-            throw $this->createNotFoundException('The user does not exist');
-        }
+        $id = (int) $id;
         $user = $entityManager->getRepository(User::class)->find($id);
 
         return $this->render('user/profile-picture.html.twig', [
