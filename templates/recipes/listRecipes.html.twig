@@ -11,13 +11,22 @@
 					<div tabindex="0" role="button" class="btn m-1">Category</div>
 					<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
 						<li>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"all" }) }}">All</a>
+						</li>
+						<li>
 							<a href="{{path ("app_recipes", {direction:direction, categName:"desserts" }) }}">Desserts</a>
 						</li>
 						<li>
 							<a href="{{path ("app_recipes", {direction:direction, categName:"main courses" }) }}">Main courses</a>
 						</li>
 						<li>
-							<a>Appetizers</a>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"Appetizers" }) }}">Appetizers</a>
+						</li>
+						<li>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"Breakfast" }) }}">Breakfast</a>
+						</li>
+						<li>
+							<a href="{{path ("app_recipes", {direction:direction, categName:"Side Dishes" }) }}">Side Dishes</a>
 						</li>
 					</ul>
 				</div>

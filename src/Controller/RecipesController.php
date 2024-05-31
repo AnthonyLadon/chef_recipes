@@ -17,6 +17,7 @@ class RecipesController extends AbstractController
         isset($direction) ? $direction : $direction = 'desc';
         isset($categName) ? $categName : $categName = 'all';
 
+        // Get the category by name
         if ($categName != 'all') {
             try {
                 $repositorycateg = $entityManager->getRepository(Category::class);
@@ -29,6 +30,7 @@ class RecipesController extends AbstractController
             $category = $categName;
         }
 
+        // if category is 'all', get all recipes
         try {
             $repository = $entityManager->getRepository(Recipe::class);
             $recipes = $repository->findByDirectionAndCategory($direction, $category);
